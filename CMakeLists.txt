@@ -27,17 +27,25 @@ project(lab04)
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
+
+# Основное тело для 
 if (BUILD_MAIN)
 	set(ADDSOURCES ${PROJECT_NAME}Sources)
 	set(MAIN_NAME ${PROJECT_NAME}Main)
 
 	add_library(
+		${ADDSOURCES}
+		STATIC
+		${CMAKE_CURRENT_SOURCE_DIR}/sources/BrokerSearcher.cpp
+	)
+	target_include_directories(
 	  ${ADDSOURCES}
-	  STATIC
-	  ${CMAKE_CURRENT_SOURCE_DIR}/sources/BrokerSearcher.cpp
+	  PUBLIC
+	  ${CMAKE_CURRENT_SOURCE_DIR}/include
 	)
 
 	add_executable(${CMAKE_PROJECT_NAME}Main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
 
 	target_include_directories(${MAIN_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+	target_link_libraries(${MAIN_NAME} ${ADDSOURCES})
 endif()

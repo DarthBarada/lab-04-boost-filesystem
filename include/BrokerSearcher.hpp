@@ -15,8 +15,9 @@ struct BrokerData
 class BrokerSearcher 
 	{
 		 public:
-		  BrokerSearcher() { BrokerSearcher("."); }
-		  BrokerSearcher(const std::filesystem::path &path);
-		  ~BrokerSearcher() = default;
-		  void search(const std::filesystem::path &path);
+		  BrokerSearcher() { search("."); }
+		  BrokerSearcher(const std::filesystem::path &path) { search(path);}
+		  void search(const std::filesystem::path &path,int level = 1);
+		 // ~BrokerSearcher() = default;
+		  //void search(const std::filesystem::path &path);
 	};
