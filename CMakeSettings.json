@@ -10,7 +10,13 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
-      "variables": []
+      "variables": [
+        {
+          "name": "CMAKE_INSTALL_PREFIX",
+          "value": "D:/MyWorks/Programming/СppProjectsForBMSTU/S3/lab04/x64-Debug",
+          "type": "PATH"
+        }
+      ]
     }
   ]
 }
