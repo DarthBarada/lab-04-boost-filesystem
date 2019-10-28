@@ -4,12 +4,12 @@
 
 int main(int argc, char *argv[]) 
 	{ 
-		std::filesystem::path path = ".";
-		/*if (argc > 1) 
+		std::filesystem::path path = std::filesystem::canonical("../../misc");
+		if (argc > 1) 
 			{
                   path = argv[1];
-			}*/
-                BrokerSearcher a{path};
-		system("pause");
+			}
+        BrokerSearcher a{path};
+
 		return 0; 
 	}
