@@ -41,11 +41,13 @@ class BrokerSearcher
 		  void print_all_finance_files();
 		  void search(const std::filesystem::path &path);
 		  void found_regular_file(const std::filesystem::path &path);
-                  ~BrokerSearcher() {
-                    database.clear();
-                    NeededFiles.clear();
-                    while (!NestedDirs.empty) {
-                      NestedDirs.pop();
-                    }
-			  }
+                  ~BrokerSearcher() 
+					  {
+						database.clear();
+						NeededFiles.clear();
+						while (!NestedDirs.empty()) 
+							{
+							  NestedDirs.pop();
+							}
+					}
 	};
