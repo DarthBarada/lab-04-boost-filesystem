@@ -31,7 +31,7 @@ void BrokerSearcher::search(const boost::filesystem::path &path)
 	{
           for (const boost::filesystem::directory_entry &EntryDir : boost::filesystem::directory_iterator{path}) 
 			{
-				 boost::filesystem::path canon_view = std::filesystem::canonical(EntryDir);				
+				 boost::filesystem::path canon_view = boost::filesystem::canonical(EntryDir);				
 
 				if (boost::filesystem::is_directory(canon_view)) 
 					{
@@ -56,20 +56,20 @@ void BrokerSearcher::found_regular_file(const boost::filesystem::path &path)
 	    BrokerData temp;
         std::string name_of_file = path.filename().string();
 		boost::smatch result;
-		/* Ìû äîëæíû èçáåãàòü ôàéëîâ, êîòîðûå íå ñîäåðæàò .old è èìÿ äðóãîãî ôîðìàòà*/
+		/* ÃŒÃ» Ã¤Ã®Ã«Ã¦Ã­Ã» Ã¨Ã§Ã¡Ã¥Ã£Ã Ã²Ã¼ Ã´Ã Ã©Ã«Ã®Ã¢, ÃªÃ®Ã²Ã®Ã°Ã»Ã¥ Ã­Ã¥ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã Ã² .old Ã¨ Ã¨Ã¬Ã¿ Ã¤Ã°Ã³Ã£Ã®Ã£Ã® Ã´Ã®Ã°Ã¬Ã Ã²Ã */
 		if (name_of_file.find(".old") != std::string::npos || !boost::regex_match(name_of_file, result, ExampleOfBA)) 
 			{
 				return;
 			}
 		NeededFiles.push_back(NestedDirs.top() + " " + path.filename().string());
 		
-		// Çàíîñèì äàííûå â áóôôåðíóþ èíôîðìàöèþ î áðîêåðå
+		// Ã‡Ã Ã­Ã®Ã±Ã¨Ã¬ Ã¤Ã Ã­Ã­Ã»Ã¥ Ã¢ Ã¡Ã³Ã´Ã´Ã¥Ã°Ã­Ã³Ã¾ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¾ Ã® Ã¡Ã°Ã®ÃªÃ¥Ã°Ã¥
 		temp.broker = NestedDirs.top();
 		temp.account = get_brocker_account(path.filename().string());
 		temp.lastdate = get_brocker_date(path.filename().string());
 		temp.files = 0;
 
-		// Åñëè â áàçå óæå ñóùåñòâóåò àêêàóíò ó òîãî æå áðîêåðà, òî
+		// Ã…Ã±Ã«Ã¨ Ã¢ Ã¡Ã Ã§Ã¥ Ã³Ã¦Ã¥ Ã±Ã³Ã¹Ã¥Ã±Ã²Ã¢Ã³Ã¥Ã² Ã ÃªÃªÃ Ã³Ã­Ã² Ã³ Ã²Ã®Ã£Ã® Ã¦Ã¥ Ã¡Ã°Ã®ÃªÃ¥Ã°Ã , Ã²Ã®
 		auto account = database.find(temp.account);
 		if ((account != database.end()) && (account->second.broker == temp.broker)) 
 			{
