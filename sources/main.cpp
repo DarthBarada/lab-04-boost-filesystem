@@ -1,6 +1,6 @@
 // Copyright 2019 Your Name <DarthBarada@gmail.com>
 
-#include "../include/BrokerSearcher.hpp"
+#include "BrokerSearcher.hpp"
 
 int main(int argc, char *argv[]) 
 	{ 
