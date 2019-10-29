@@ -27,19 +27,19 @@ void BrokerSearcher::print_all_finance_files()
 		std::cout<<"\n";
 	}
 
-void BrokerSearcher::search(const std::filesystem::path &path) 
+void BrokerSearcher::search(const boost::filesystem::path &path) 
 	{
-		for (const std::filesystem::directory_entry &EntryDir : std::filesystem::directory_iterator{path}) 
+          for (const boost::filesystem::directory_entry &EntryDir : boost::filesystem::directory_iterator{path}) 
 			{
-				std::filesystem::path canon_view = std::filesystem::canonical(EntryDir);				
+				 boost::filesystem::path canon_view = std::filesystem::canonical(EntryDir);				
 
-				if (std::filesystem::is_directory(canon_view)) 
+				if (boost::filesystem::is_directory(canon_view)) 
 					{
 						NestedDirs.push(canon_view.stem().string());
 
 						search(canon_view);
 					} 
-				else if (std::filesystem::is_regular_file(canon_view)) 
+				else if (boost::filesystem::is_regular_file(canon_view)) 
 					{
 					   found_regular_file(canon_view);
 					}
@@ -51,13 +51,13 @@ void BrokerSearcher::search(const std::filesystem::path &path)
 			}
 	}
 
-void BrokerSearcher::found_regular_file(const std::filesystem::path &path) 
+void BrokerSearcher::found_regular_file(const boost::filesystem::path &path) 
 	{
 	    BrokerData temp;
         std::string name_of_file = path.filename().string();
-		std::smatch result;
+		boost::smatch result;
 		/* Мы должны избегать файлов, которые не содержат .old и имя другого формата*/
-		if (name_of_file.find(".old") != std::string::npos || !std::regex_match(name_of_file, result, ExampleOfBA)) 
+		if (name_of_file.find(".old") != std::string::npos || !boost::regex_match(name_of_file, result, ExampleOfBA)) 
 			{
 				return;
 			}
