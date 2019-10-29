@@ -24,7 +24,7 @@ hunter_add_package(Boost COMPONENTS filesystem regex)
 find_package(Boost CONFIG REQUIRED filesystem regex)
 find_package(Threads)
 
-# Основное тело для 
+# ГЋГ±Г­Г®ГўГ­Г®ГҐ ГІГҐГ«Г® Г¤Г«Гї 
 if (BUILD_MAIN)
 	set(ADDSOURCES ${PROJECT_NAME}Sources)
 	set(MAIN_NAME ${PROJECT_NAME}Main)
@@ -38,7 +38,14 @@ if (BUILD_MAIN)
 	  ${ADDSOURCES}
 	  PUBLIC
 	  ${CMAKE_CURRENT_SOURCE_DIR}/include
+          
 	)
+
+        target_link_libraries(
+         ${ADDSOURCES}
+         Boost::filesystem
+         Boost::regex
+         )
 
 	add_executable(${CMAKE_PROJECT_NAME}Main ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp)
 
